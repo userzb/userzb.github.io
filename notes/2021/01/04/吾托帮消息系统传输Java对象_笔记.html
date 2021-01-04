@@ -82,9 +82,38 @@ System.out.println(Arrays.equals(byteArray,byteArray1));
 
 <ul>
   <li>基础，输出被映射到一组字符A-Za-z0-9+/，编码不添加任何行标，输出的解码仅支持A-Za-z0-9+/。</li>
-  <li>URL，输出映射到一组字符A-Za-z0-9+_，输出是URL和文件。</li>
+  <li>URL，输出映射到一组字符A-Za-z0-9-_，输出是URL和文件。</li>
   <li>MIME，输出隐射到MIME友好格式。输出每行不超过76字符，并且使用’\r’并跟随’\n’作为分割。编码输出最后没有行分割。</li>
 </ul>
+
+<p>具体可参考Base64源码</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * This array is a lookup table that translates 6-bit positive integer
+ * index values into their "Base64 Alphabet" equivalents as specified
+ * in "Table 1: The Base64 Alphabet" of RFC 2045 (and RFC 4648).
+ */
+private static final char[] toBase64 = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
+};
+
+/**
+ * It's the lookup table for "URL and Filename safe Base64" as specified
+ * in Table 2 of the RFC 4648, with the '+' and '/' changed to '-' and
+ * '_'. This table is used when BASE64_URL is specified.
+ */
+private static final char[] toBase64URL = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_'
+};
+</code></pre></div></div>
 
 <p>因为传输协议是基于HTTP的，基础Base64存在+等字符，’+’在请求时会被识别为’ ‘字符，所以这里我们的选型为URL的Base64编码。</p>
 

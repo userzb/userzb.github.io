@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://userzb.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://userzb.github.io/" rel="alternate" type="text/html" /><updated>2021-01-04T16:27:39+08:00</updated><id>https://userzb.github.io/feed.xml</id><title type="html">userzb’s blog</title><subtitle>记录、分享。</subtitle><entry><title type="html">吾托帮消息系统传输Java对象_笔记</title><link href="https://userzb.github.io/notes/2021/01/04/%E5%90%BE%E6%89%98%E5%B8%AE%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%BC%A0%E8%BE%93Java%E5%AF%B9%E8%B1%A1_%E7%AC%94%E8%AE%B0.html" rel="alternate" type="text/html" title="吾托帮消息系统传输Java对象_笔记" /><published>2021-01-04T00:00:00+08:00</published><updated>2021-01-04T00:00:00+08:00</updated><id>https://userzb.github.io/notes/2021/01/04/%E5%90%BE%E6%89%98%E5%B8%AE%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%BC%A0%E8%BE%93Java%E5%AF%B9%E8%B1%A1_%E7%AC%94%E8%AE%B0</id><content type="html" xml:base="https://userzb.github.io/notes/2021/01/04/%E5%90%BE%E6%89%98%E5%B8%AE%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%BC%A0%E8%BE%93Java%E5%AF%B9%E8%B1%A1_%E7%AC%94%E8%AE%B0.html">&lt;h2 id=&quot;背景说明&quot;&gt;背景说明&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://userzb.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://userzb.github.io/" rel="alternate" type="text/html" /><updated>2021-01-04T16:39:38+08:00</updated><id>https://userzb.github.io/feed.xml</id><title type="html">userzb’s blog</title><subtitle>记录、分享。</subtitle><entry><title type="html">吾托帮消息系统传输Java对象_笔记</title><link href="https://userzb.github.io/notes/2021/01/04/%E5%90%BE%E6%89%98%E5%B8%AE%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%BC%A0%E8%BE%93Java%E5%AF%B9%E8%B1%A1_%E7%AC%94%E8%AE%B0.html" rel="alternate" type="text/html" title="吾托帮消息系统传输Java对象_笔记" /><published>2021-01-04T00:00:00+08:00</published><updated>2021-01-04T00:00:00+08:00</updated><id>https://userzb.github.io/notes/2021/01/04/%E5%90%BE%E6%89%98%E5%B8%AE%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%BC%A0%E8%BE%93Java%E5%AF%B9%E8%B1%A1_%E7%AC%94%E8%AE%B0</id><content type="html" xml:base="https://userzb.github.io/notes/2021/01/04/%E5%90%BE%E6%89%98%E5%B8%AE%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E4%BC%A0%E8%BE%93Java%E5%AF%B9%E8%B1%A1_%E7%AC%94%E8%AE%B0.html">&lt;h2 id=&quot;背景说明&quot;&gt;背景说明&lt;/h2&gt;
 
 &lt;p&gt;最近，我需要通过吾托帮消息系统来传输Java对象。&lt;/p&gt;
 
@@ -33,9 +33,38 @@ System.out.println(Arrays.equals(byteArray,byteArray1));
 
 &lt;ul&gt;
   &lt;li&gt;基础，输出被映射到一组字符A-Za-z0-9+/，编码不添加任何行标，输出的解码仅支持A-Za-z0-9+/。&lt;/li&gt;
-  &lt;li&gt;URL，输出映射到一组字符A-Za-z0-9+_，输出是URL和文件。&lt;/li&gt;
+  &lt;li&gt;URL，输出映射到一组字符A-Za-z0-9-_，输出是URL和文件。&lt;/li&gt;
   &lt;li&gt;MIME，输出隐射到MIME友好格式。输出每行不超过76字符，并且使用’\r’并跟随’\n’作为分割。编码输出最后没有行分割。&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;具体可参考Base64源码&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ * This array is a lookup table that translates 6-bit positive integer
+ * index values into their &quot;Base64 Alphabet&quot; equivalents as specified
+ * in &quot;Table 1: The Base64 Alphabet&quot; of RFC 2045 (and RFC 4648).
+ */
+private static final char[] toBase64 = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
+};
+
+/**
+ * It's the lookup table for &quot;URL and Filename safe Base64&quot; as specified
+ * in Table 2 of the RFC 4648, with the '+' and '/' changed to '-' and
+ * '_'. This table is used when BASE64_URL is specified.
+ */
+private static final char[] toBase64URL = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_'
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;因为传输协议是基于HTTP的，基础Base64存在+等字符，’+’在请求时会被识别为’ ‘字符，所以这里我们的选型为URL的Base64编码。&lt;/p&gt;
 
