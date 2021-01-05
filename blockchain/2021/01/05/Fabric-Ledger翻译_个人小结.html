@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Fabric Ledger翻译_个人小结 | userzb’s blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Fabric Ledger翻译_个人小结" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="参考链接：https://hyperledger-fabric.readthedocs.io/en/release-1.4/ledger/ledger.html" />
+<meta property="og:description" content="参考链接：https://hyperledger-fabric.readthedocs.io/en/release-1.4/ledger/ledger.html" />
+<link rel="canonical" href="https://userzb.github.io/blockchain/2021/01/05/Fabric-Ledger%E7%BF%BB%E8%AF%91_%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93.html" />
+<meta property="og:url" content="https://userzb.github.io/blockchain/2021/01/05/Fabric-Ledger%E7%BF%BB%E8%AF%91_%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93.html" />
+<meta property="og:site_name" content="userzb’s blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-05T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Fabric Ledger翻译_个人小结" />
+<script type="application/ld+json">
+{"dateModified":"2021-01-05T00:00:00+08:00","datePublished":"2021-01-05T00:00:00+08:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://userzb.github.io/blockchain/2021/01/05/Fabric-Ledger%E7%BF%BB%E8%AF%91_%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93.html"},"url":"https://userzb.github.io/blockchain/2021/01/05/Fabric-Ledger%E7%BF%BB%E8%AF%91_%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93.html","description":"参考链接：https://hyperledger-fabric.readthedocs.io/en/release-1.4/ledger/ledger.html","headline":"Fabric Ledger翻译_个人小结","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://userzb.github.io/feed.xml" title="userzb's blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">userzb&#39;s blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Fabric Ledger翻译_个人小结</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-01-05T00:00:00+08:00" itemprop="datePublished">Jan 5, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>参考链接：https://hyperledger-fabric.readthedocs.io/en/release-1.4/ledger/ledger.html</p>
+
+<p>备注：</p>
+
+<p>Facts：真实情况</p>
+
+<p>State：状态</p>
+
+<p>Ledger：账本</p>
+
+<p>Endorsement(背书)：背书是指持票人为将票据权利转让给他人或者将一定的票据权利授予他人行使，而在票据背面或者粘单上记载有关事项并签章的行为。</p>
+
+<p><a href="https://baike.baidu.com/item/背书/5605616?fr=aladdin">https://baike.baidu.com/item/%E8%83%8C%E4%B9%A6/5605616?fr=aladdin</a></p>
+
+<h2 id="什么是账本">什么是账本？</h2>
+<p>账本包含了当前业务的状态，一般地我们把账本看成是交易日志。最早的欧洲和中国账本可追溯到1000年前，苏美尔人的石刻账本则已有4000年历史。现在，我们以为最新的账本为例来展开我们对账本的讨论。</p>
+
+<p>银行账户就是讨论账本的最好例子。在这个场景中，我们会关注两个点：（1）当前可用余额，因为它表示我们当前可以花费的金额。（2）当前可用余额是怎么形成，一般地我们是通过查阅过往交易的收入和支出。
+这是一个关于账本的现实生活例子，一个状态（银行余额），以及一系列有序的交易（收入和支出信息）。
+Fabric受到以上两个方面的启发，去表示当前账本状态的值，以及去捕获形成当前账本状态的历史交易日志。</p>
+
+<h2 id="账本ledger真实情况facts状态state">账本Ledger，真实情况Facts，状态State</h2>
+<p>一个账本不单单是书面上把业务对象给保存下来，而且把这个业务对象相对应的真实情况给保存下来。
+当我们说我们把业务对象保存到了账本上的时候，其实就是说我们把这个业务对象<strong>当前状态</strong>和产生当前状态的<strong>历史交易</strong>这些真实情况给记录下来。
+在极速增长的数字世界中（宏观上），我们关注的是对象本身而不是对象反映的真实情况。
+但在讨论对象本身时（微观上），它看起来像生活在一个外部数据存储中，因为这个对象反映的真实情况都保存在账本上，而账本允许我们找到这个对象所记录的位置以及与这个对象相关的信息。</p>
+
+<p>当业务对象的当前状态可以改变的时候，其历史所反映的真实情况是不可纂改的，它能被添加新状态，但是不能回溯去修改就状态。下面我们将看看区块链是入到做到保证历史的真实情况是不可以修改的。</p>
+
+<p><strong>小结</strong></p>
+
+<p>账本可保存多个业务对象，而业务对象的真实情况通过历史交易（日志）来反映的，其反应的值我们用状态来表示。</p>
+
+<p>历史交易（日志）不可纂改，所以历史交易（日志）产生的状态也不可修改，但是我们可以通过添加交易来改变这个状态。</p>
+
+<h2 id="fabric账本">Fabric账本</h2>
+
+<p><img src="/assets/blockchain/2021-01-05-Fabric Ledger翻译_个人小结/ledger.diagram.1.png" alt="ledger.ledger" /></p>
+
+<p>在Fabric中，账本由两部分组成，分别为历史状态和区块链。账本表示一组业务对象的真实情况。</p>
+
+<p>世界状态。它是一个数据库，可看作是反映账本状态当前值的缓存。世界状态使程序可以轻松地直接访问状态的当前值，而不必通过遍历整个交易日志进行计算。 默认情况下，账本状态表示为键值对（key-value）。世界状态可以频繁更改，因为它可以创建，更新和删除状态。</p>
+
+<p>区块链。记录所有引发当前世界状态发生的更改的交易日志。 交易收集到一个区块中，并把区块附加到区块链的尾部，使我们能够了解引发当前世界状态变化的历史。 区块链数据结构与世界状态非常不同，因为一旦写入，就无法修改； 它是不可纂改的。</p>
+
+<p>我们必须树立起这么一个观点，就是在Fabric的网络中，逻辑上只有一份账本，但是物理上这份账本保存在多个节点上，而维护这份逻辑账本，保证物理账本一致性的过程我们称之为<strong>共识</strong>。分布式账本技术（DLT）经常被关联到逻辑上一个，物理上多个账本中。</p>
+
+<h2 id="世界状态">世界状态</h2>
+
+<p>世界状态将业务对象的属性的当前值保留为唯一的账本状态。 因为程序通常需要业务对象的当前值，而遍历整个区块链来计算业务对象的当前值将很麻烦而且效率很低，所以世界状态的设计使得访问对象当前值变得很便捷。</p>
+
+<p><img src="/assets/blockchain/2021-01-05-Fabric Ledger翻译_个人小结/ledger.diagram.2.png" alt="ledger.worldstate" /></p>
+
+<p>一个账本状态记录着一系列有关业务实体的真实情况。上图展示了关于两部车的账本状态，CAR1和CAR2，它们都由key value组成的。一个应用程序通过调用智能合约来操作账本的状态，其操作为访问账本的API来get、put和delete状态。</p>
+
+<p>世界状态通常使用数据库来实现。因为数据库提供了丰富的操作以支撑数据的存储和数据的检索。Fabric提供了切换不同数据库的机制以提供复杂的查询。</p>
+
+<p>应用程序提交将会对世界状态产生影响的交易，这些交易最终会被提交到账本的区块链中。应用将会被SDK隔离，从而不需要了解共识机制的细节；他们仅仅需要调用智能合约，以及当交易被区块链包含时收到通知。这个设计的关键点是只有交易被指定的背书机构签名了，这条交易才会更新世界状态。如果交易没有被足够多的背书节点签名，那么它将不会改变世界状态。</p>
+
+<p>每个状态都有一个版本号。目的是确保状态和预期的改变一样，没有并发的更新。（有点像MySQL的MVCC机制，乐观锁）</p>
+
+<p>最后，一旦账本被创建，它的世界状态是空的。因为任何一个有效、可改变世界状态的交易都是保存在区块链上的，这意味这世界状态能够在任何时间段通过区块链来重新生成。</p>
+
+<p>如果一个peer节点非异常宕机了，那么世界状态可以在peer节点重启时重新生成，而下一条交易将会在peer节点完成世界状态的生成后被接受。</p>
+
+<p><strong>小结</strong></p>
+
+<p>（1）世界状态保存当前账本中业务对象的值。</p>
+
+<p>（2）世界状态通过数据库技术来实现的，可把它看作是一个缓存，因为它用于提升检索某个业务对象的当前状态值的速度。</p>
+
+<p>（3）世界状态的操作有get、put和delete。</p>
+
+<p>（4）目前的世界状态都是用键值对表示，并为每个键值对添加版本号，用来控制并发。</p>
+
+<p>（5）世界状态不是Fabric账本必需的元素。</p>
+
+<h2 id="blockchain">Blockchain</h2>
+
+<p>尽管世界状态包含了一系列跟当前业务对象当前状态相关的真实情况，区块链记录的是这些真实情况是如何从历史的真实情况迁移的。区块链记录着（1）账本的历史状态；（2）账本历史状态的改变过程。</p>
+
+<p>区块链被构造为互连区块的顺序日志，其中每个区块包含一系列交易，每个交易代表对世界状态的查询或更新。 交易排序的机制在其他地方讨论； 重要的是，在Orderer节点创建区块时，就建立了区块的排序以及区块内的交易排序。</p>
+
+<p>每个区块头部包含了（1）当前区块交易的哈希值；（2）上一个区块的区块头哈希。这种哈希和连接的方式使得账本数据非常安全。通过上面的方法，使得所有交易在区块中的顺序性，以及通过密码学的方式将他们连接到一起。这种哈希和连接的方式使得账本数据非常安全，因为即使一个节点纂改了账本，而账本是分布在一个非独立节点的网络中，纂改的节点不能通过一种便捷地方法来修改其它节点的账本。</p>
+
+<p>区块链是使用文件的方式实现的。使用文件方式实现的原因是区块链的两种操作具有十分大的偏差。主要分为两种：（1）插入，而且只在尾部插入，这类操作是十分频繁的。（2）查询，这类操作是十分稀少的，因为世界状态。</p>
+
+<p><img src="/assets/blockchain/2021-01-05-Fabric Ledger翻译_个人小结/ledger.diagram.3.png" alt="ledger.blockchain" /></p>
+
+<p>从图上可见，以B2区块为例，其区块数据D2包含了3条交易T5、T6、T7。</p>
+
+<p>B2区块的区块头H2，H2保存了当前区块数据的Hash值和上一个区块的区块头Hash值。通过这种方法，区块间变得密不可分，从而使得区块不能纂改。</p>
+
+<p>区块链的第一个区块称为创世块。创世块是没有交易的，但它包含了一个名为配置交易的交易。该类型交易用于记录Fabric网络通道的初始状态。我们把这类型的区块称之为配置区块，这里我们不加以讨论。</p>
+
+<h2 id="区块">区块</h2>
+
+<p>区块的结构分为3部分：</p>
+
+<p>1.区块头(Block Header)</p>
+
+<p>Block Number：表示当前区块位于区块链的位置。其中创世块的Number为0，每往后插入一个区块，对应的Number加一。</p>
+
+<p>Block Hash：表示当前区块的区块体的哈希值。</p>
+
+<p>Previous Block Hash：表示上一个区块的区块头的哈希值。特别的，创世块的Previous Block Hash为空。</p>
+
+<p>这些字段通过对区块的内部数据进行哈希而得到的。 以确保每个区块都与相邻区块密不可分，从而导致账本不可纂改。</p>
+
+<p>2.区块数据(Block Data)</p>
+
+<p>区块数据包含着一批排序好的交易。这部分数据是在Orderer节点出块的时候产生。这些交易结构虽然很复杂但是却很直观。</p>
+
+<p>3.区块元数据(Block Metadata)</p>
+
+<p>区块元数据包含的内容有：（1）区块被写入时的时间；（2）区块写入者的证书、公钥和签名。（3）区块中每个交易的有效性(valid/invalid)标记。其中这部分标记是不包含着block hash里，因为block hash是在区块创建时（orderer节点）就被创建了。交易有效性标记则是在peer节点验证时生成。</p>
+
+<h2 id="交易">交易</h2>
+
+<p><img src="/assets/blockchain/2021-01-05-Fabric Ledger翻译_个人小结/ledger.diagram.4.png" alt="ledger.transaction" /></p>
+
+<p>一条交易掌握了世界状态的改变。上图给出了一个交易的数据结构，它主要由五个字段组成：</p>
+
+<p>1.Header–头部</p>
+
+<p>Header主要保存了这条交易相关的元数据，比如跟这条交易相关的链码（智能合约）的名称和版本等等。</p>
+
+<p>2.Signature–签名</p>
+
+<p>Signature包含了一个由客户端应用产生的数字签名。它的目的是用于检测这条交易的细节没有被修改，数字签名的生成需要客户端应用的私钥。（有关数字签名的作用我就不再赘述，它的作用其实就用于验证）</p>
+
+<p>3.Proposal–提案</p>
+
+<p>Proposal是对客户端应用提供给智能合约的输入参数进行编码，这些输入参数用于创建提议的账本更新。 当智能合约运行时，proposal提供了一组输入参数，这些输入参数与当前的世界状态一起确定了新的世界状态。</p>
+
+<p>4.Response–响应</p>
+
+<p>Response捕获了交易发生前的世界状态值和交易发生后的世界状态值，我们称之为读写集(RW-set)。Response可以理解为智能合约的输出（就是RW-set），如果这条交易被验证成功了，那么将会把对应的RW-set作用到账本中，用于更新世界状态。</p>
+
+<p>这部分可以这样理解，一条交易为A给B转账十块，对应的读写集为 [load A，load B，store A A-10，store B B+10]，load为读，store为写。后续这个区块的每条交易都需要验证，就是验证A给B转账十块这条交易是否合法，如果合法了，会把这条交易标记为valid，然后执行读写集[load A，load B，store A A-10，store B B+10]，从而改变世界状态。</p>
+
+<p>5.Endorserments–背书</p>
+
+<p>Endorsements就是一个列表，该列表存放了某些组织对当前交易的Response的签名，而这些组织必须是背书规则中所声明的，而且要达到背书规则中指定的数量。</p>
+
+<p>我们会发现尽管一条交易只包含了一个交易Response，但是它却包含了多条背书。这是因为每条背书实际上是对每个机构的特指交易的Response进行了编码（其实就是说明了这些机构能正确响应这条交易，既认可了这条交易）。这意味着没有必要去包含那些没有满足背书规则（即这条交易没有被足够多的机构所背书）的交易，因为这些交易都没标记为invalid，不会对世界状态进行更新。</p>
+
+<p>当然交易还有一些别的字段组成，但上面五个字段是必不可少的，我们需要将它们的概念掌握后才能更好进一步分析区块。</p>
+
+<h2 id="命名空间">命名空间</h2>
+
+<p>即使我们已经将账本呈现为一个单一的世界状态和单个区块链，但这还是有点过于简化了。 实际上，每个链码都有自己的世界状态，该世界状态与所有其他链码是分开的。 世界状态位于命名空间中，因此只有相同链码内的智能合约才能访问给定的命名空间。</p>
+
+<p>然而区块链是没有命名空间这个概念的，因为它包含了来自不同命名空间的智能合约的交易。</p>
+
+<h2 id="通道channels">通道(Channels)</h2>
+
+<p>在Fabric中，每个通道都有一个完全分离的账本，这意味着区块链、世界状态和命名空间都是分离的。</p>
+
+<p>当然，我们可以通过客户端应用和智能合约来实现不同通道间的通信，使得它们的账本信息能够被访问。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>世界状态(World State)</th>
+      <th>区块链(Blockchain)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>实现方式</td>
+      <td>数据库</td>
+      <td>文件</td>
+    </tr>
+    <tr>
+      <td>组成元素</td>
+      <td>键值对</td>
+      <td>区块</td>
+    </tr>
+    <tr>
+      <td>是否为账本中必需的元素</td>
+      <td>否</td>
+      <td>是</td>
+    </tr>
+    <tr>
+      <td>记录的内容</td>
+      <td>由历史交易引起的值</td>
+      <td>历史交易</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </div><a class="u-url" href="/blockchain/2021/01/05/Fabric-Ledger%E7%BF%BB%E8%AF%91_%E4%B8%AA%E4%BA%BA%E5%B0%8F%E7%BB%93.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">userzb&#39;s blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">userzb&#39;s blog</li><li><a class="u-email" href="mailto:zhibinz@126.com">zhibinz@126.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>记录、分享。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
